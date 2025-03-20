@@ -17,6 +17,10 @@ class PropertyOffer(models.Model):
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline", store=True)
 
+    _sql_constraints = [
+        ('check_price', 'CHECK(price > 0)', 'The price must be strictly positive')
+    ]
+
     @api.depends('estate.property.offer_ids')
     def action_accept(self):
         for record in self:

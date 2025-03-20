@@ -1,5 +1,6 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 import dateutil
 
 class Property(models.Model):
@@ -36,6 +37,11 @@ class Property(models.Model):
     salesman = fields.Many2one('res.users', default=lambda self: self.env.user)
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offers')
 
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price > 0)', 'The expected price must be strictly positive'),
+        ('check_selling_price', 'CHECK(selling_price > 0)', 'The selling price must be strictly positive')
+    ]
+
     def action_sold(self):
         for record in self:
             if record.state != "cancelled":
@@ -51,6 +57,13 @@ class Property(models.Model):
             else:
                 raise UserError('Canceled properties cannot be sold')
         return True
+
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if not float_is_zero(record.selling_price):
+                if float_compare(record.expected_price, record.selling_price * 0.9, precision_rounding=rounding) > 0:
+                    raise ValidationError('The selling price must not be below 90% of the expected price')
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
