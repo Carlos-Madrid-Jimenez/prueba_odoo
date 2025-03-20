@@ -1,8 +1,6 @@
-import logging
 from datetime import timedelta
 from odoo import api, fields, models
-
-_logger = logging.getLogger(__name__)
+from odoo.exceptions import UserError
 
 class PropertyOffer(models.Model):
     _name = 'estate.property.offer'
@@ -19,6 +17,22 @@ class PropertyOffer(models.Model):
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline", store=True)
 
+    @api.depends('estate.property.offer_ids')
+    def action_accept(self):
+        for record in self:
+            for offer in record.property_id.offer_ids:
+                if offer.status == "accepted":
+                    raise UserError('Only one offer can be accepted at a time')
+            record.status = "accepted"
+            record.property_id.selling_price = record.price
+            record.property_id.buyer = record.partner_id
+        return True
+
+    def action_refuse(self):
+        for record in self:
+            record.status = "refused"
+        return True
+
     @api.depends('create_date', 'validity', 'date_deadline')
     def _compute_deadline(self):
         for record in self:
@@ -33,6 +47,4 @@ class PropertyOffer(models.Model):
             if record.date_deadline:
                 today = fields.Date.today()
                 delta = record.date_deadline - today
-                _logger.info("Calculando validity: date_deadline = %s, today = %s, delta.days = %d",
-                             record.date_deadline, today, delta.days)
                 record.validity = delta.days

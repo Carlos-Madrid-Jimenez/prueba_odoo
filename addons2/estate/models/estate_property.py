@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 import dateutil
 
 class Property(models.Model):
@@ -34,6 +35,22 @@ class Property(models.Model):
     buyer = fields.Many2one('res.partner', copy=False)
     salesman = fields.Many2one('res.users', default=lambda self: self.env.user)
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offers')
+
+    def action_sold(self):
+        for record in self:
+            if record.state != "cancelled":
+                record.state = "sold"
+            else:
+                raise UserError('Sold properties cannot be canceled')
+        return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.state != "sold":
+                record.state = "cancelled"
+            else:
+                raise UserError('Canceled properties cannot be sold')
+        return True
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
