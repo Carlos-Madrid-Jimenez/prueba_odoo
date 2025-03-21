@@ -6,6 +6,7 @@ import dateutil
 class Property(models.Model):
     _name = 'estate.property'
     _description = 'Estate property'
+    _order = 'id desc'
 
     name = fields.Char(required=True)
     description = fields.Text()
@@ -47,7 +48,7 @@ class Property(models.Model):
             if record.state != "cancelled":
                 record.state = "sold"
             else:
-                raise UserError('Sold properties cannot be canceled')
+                raise UserError('Canceled properties cannot be sold')
         return True
 
     def action_cancel(self):
@@ -55,7 +56,7 @@ class Property(models.Model):
             if record.state != "sold":
                 record.state = "cancelled"
             else:
-                raise UserError('Canceled properties cannot be sold')
+                raise UserError('Sold properties cannot be canceled')
         return True
 
     @api.constrains('selling_price')

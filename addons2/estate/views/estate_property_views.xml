@@ -26,8 +26,9 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="action_sold" type="object" string="Sold"/>
-                    <button name="action_cancel" type="object" string="Cancel"/>
+                    <button name="action_sold" type="object" string="Sold" invisible="state=='Sold' or state=='Canceled'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state=='Sold' or state=='Canceled'"/>
+                    <field name="state" widget="statusbar" string="Status"/>
                 </header>
                 <sheet>
                     <group>
@@ -37,8 +38,7 @@
                     </group>
                     <group>
                         <group>
-                            <field name="tag_ids" widget="many2many_tags"/>
-                            <field name="state" string="Status"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             <field name="property_type_id" string="Property Type"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Available From"/>
@@ -96,6 +96,34 @@
                 <field name="selling_price"/>
                 <field name="date_availability" string="Available From"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_type_tree" model="ir.ui.view">
+        <field name="name">estate.property.type.tree</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree string="Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">estate.property.type.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="name"/>
+                <field name="property_ids">
+                    <tree>
+                        <field name="name" string="Title"/>
+                        <field name="expected_price"/>
+                        <field name="state" string="Status"/>
+                    </tree>
+                </field>
+            </form>
         </field>
     </record>
 
