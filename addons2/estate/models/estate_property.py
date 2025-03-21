@@ -61,9 +61,9 @@ class Property(models.Model):
     @api.constrains('selling_price')
     def _check_selling_price(self):
         for record in self:
-            if not float_is_zero(record.selling_price):
-                if float_compare(record.expected_price, record.selling_price * 0.9, precision_rounding=rounding) > 0:
-                    raise ValidationError('The selling price must not be below 90% of the expected price')
+            if not float_is_zero(record.selling_price, precision_digits=2):
+                if float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
+                    raise ValidationError(f'The selling price must not be below 90% of the expected price')
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
