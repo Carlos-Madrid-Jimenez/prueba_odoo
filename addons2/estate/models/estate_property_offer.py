@@ -15,6 +15,7 @@ class PropertyOffer(models.Model):
     )
     partner_id = fields.Many2one('res.partner', required=True)
     property_id = fields.Many2one('estate.property', required=True)
+    property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline", store=True)
 
@@ -29,6 +30,7 @@ class PropertyOffer(models.Model):
                 if offer.status == "accepted":
                     raise UserError('Only one offer can be accepted at a time')
             record.status = "accepted"
+            record.property_id.state = 'offer_accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer = record.partner_id
         return True
