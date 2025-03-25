@@ -16,7 +16,7 @@ class Property(models.Model):
     date_availability = fields.Date(copy=False, default=lambda self: fields.Date.today() + dateutil.relativedelta.relativedelta(months=3))
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True, copy=False)
-    best_price = fields.Float(compute="_compute_best_price", readonly=True)
+    best_price = fields.Float(compute="_compute_best_price", readonly=True, store=True)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
@@ -26,7 +26,7 @@ class Property(models.Model):
     garden_orientation = fields.Selection(
         string='Orientation',
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')])
-    total_area = fields.Integer(compute="_compute_total_area", readonly=True)
+    total_area = fields.Integer(compute="_compute_total_area", readonly=True, store=True)
     active = fields.Boolean(default=False)
     state = fields.Selection(
         copy=False,
@@ -42,6 +42,12 @@ class Property(models.Model):
         ('check_expected_price', 'CHECK(expected_price > 0)', 'The expected price must be strictly positive'),
         ('check_selling_price', 'CHECK(selling_price > 0)', 'The selling price must be strictly positive')
     ]
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_property_not_new_or_cancelled(self):
+        for record in self:
+            if record.state not in ['new', 'cancelled']:
+                raise UserError("Only new and canceled properties can be deleted")
 
     def action_sold(self):
         for record in self:

@@ -23,7 +23,15 @@ class PropertyOffer(models.Model):
         ('check_price', 'CHECK(price > 0)', 'The price must be strictly positive')
     ]
 
-    @api.depends('estate.property.offer_ids')
+    @api.model
+    def create(self, vals):
+        for record in self:
+            if self.env['estate.property'].browse(vals['property_id']).state == 'new':
+                record.property_id.state = 'offer_received'
+
+        return super().create(vals)
+
+    @api.depends('property_id.offer_ids')
     def action_accept(self):
         for record in self:
             for offer in record.property_id.offer_ids:
@@ -40,7 +48,7 @@ class PropertyOffer(models.Model):
             record.status = "refused"
         return True
 
-    @api.depends('create_date', 'validity', 'date_deadline')
+    @api.depends('create_date', 'validity')
     def _compute_deadline(self):
         for record in self:
             if record.create_date:
