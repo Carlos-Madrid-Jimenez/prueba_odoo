@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="incidencias_menu_root" name="Incidencias" />
+    <menuitem id="incidencias_menu_root" name="Incidencias"/>
         <menuitem id="incidencias_first_level_menu" name="Incidencias" parent="incidencias_menu_root"/>
-            <menuitem id="incidencias_tickets_menu_action" action="incidencias_tickets_action" parent="incidencias_first_level_menu"/>
+            <menuitem id="incidencias_ticket_menu_action" action="incidencias_ticket_action" parent="incidencias_first_level_menu"/>
 </odoo>

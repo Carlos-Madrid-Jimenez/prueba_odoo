@@ -7,4 +7,4 @@ class Equipo(models.Model):
     nombre = fields.Char(required=True)
     responsable = fields.Many2one("res.users")
     miembros = fields.Many2one("res.users")
-    ticket_ids = fields.Many2one("incidencias.tickets")
+    ticket_ids = fields.Many2one("incidencias.ticket")

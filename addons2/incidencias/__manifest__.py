@@ -1,7 +1,7 @@
 {
     'name': "Incidencias",
     'version': '17.0.1.1',
-    'depends': [],
+    'depends': ['base'],
     'author': "Carlos Madrid Jiménez",
     'category': 'Category',
     'description': """
@@ -9,7 +9,9 @@
     """,
     # data files always loaded at installation
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'views/incidencias_ticket_views.xml',
+        'views/incidencias_menus.xml',
     ],
     # data files containing optionally loaded demonstration data
     # 'demo': [],

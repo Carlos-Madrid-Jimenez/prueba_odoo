@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="incidencias_tickets_action" model="ir.actions.act_window">
+    <record id="incidencias_ticket_action" model="ir.actions.act_window">
         <field name="name">Tickets</field>
         <field name="res_model">incidencias.ticket</field>
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="incidencias_ticket_view_form" model="ir.ui.view">
+        <field name="name">incidencias.ticket.form</field>
+        <field name="model">incidencias.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Ticket">
+                <header>
+<!--                    <field name="state" widget="statusbar" string="Status"/>-->
+                </header>
+                <sheet>
+                    <group>
+                        <h1 class="mb32">
+                            <field name="nombre"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="descripcion" string="Descripción"/>
+                            <field name="equipo_asociado"/>
+                            <field name="prioridad"/>
+                            <field name="categoria"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
+    <record id="incidencias_ticket_view_tree" model="ir.ui.view">
+        <field name="name">incidencias.ticket.list</field>
+        <field name="model">incidencias.ticket</field>
+
+        <field name="arch" type="xml">
+            <tree string="Tickets">
+                <field name="nombre"/>
+                <field name="descripcion" string="Descripción"/>
+                <field name="equipo_asociado"/>
+                <field name="prioridad"/>
+                <field name="categoria"/>
+                <field name="fecha_asignacion"/>
+                <field name="fecha_actualizacion"/>
+                <field name="fecha_cierre"/>
+            </tree>
+        </field>
+    </record>
 </odoo>
