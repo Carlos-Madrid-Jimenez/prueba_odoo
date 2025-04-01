@@ -11,6 +11,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/incidencias_ticket_views.xml',
+        'views/incidencias_equipo_views.xml',
         'views/incidencias_menus.xml',
     ],
     # data files containing optionally loaded demonstration data

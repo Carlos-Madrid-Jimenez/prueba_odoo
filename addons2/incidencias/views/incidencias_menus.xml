@@ -3,4 +3,5 @@
     <menuitem id="incidencias_menu_root" name="Incidencias"/>
         <menuitem id="incidencias_first_level_menu" name="Incidencias" parent="incidencias_menu_root"/>
             <menuitem id="incidencias_ticket_menu_action" action="incidencias_ticket_action" parent="incidencias_first_level_menu"/>
+            <menuitem id="incidencias_equipo_menu_action" action="incidencias_equipo_action" parent="incidencias_first_level_menu"/>
 </odoo>

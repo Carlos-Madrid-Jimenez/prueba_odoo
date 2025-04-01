@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="incidencias_equipo_action" model="ir.actions.act_window">
+        <field name="name">Equipos</field>
+        <field name="res_model">incidencias.equipo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="incidencias_equipo_view_form" model="ir.ui.view">
+        <field name="name">incidencias.equipo.form</field>
+        <field name="model">incidencias.equipo</field>
+        <field name="arch" type="xml">
+            <form string="Equipo">
+                <header>
+<!--                    <field name="state" widget="statusbar" string="Status"/>-->
+                </header>
+                <sheet>
+                    <group>
+                        <h1 class="mb32">
+                            <field name="name"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="responsable"/>
+                            <field name="miembros"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="incidencias_equipo_view_tree" model="ir.ui.view">
+        <field name="name">incidencias.equipo.list</field>
+        <field name="model">incidencias.equipo</field>
+        <field name="arch" type="xml">
+            <tree string="Equipos">
+                <field name="name"/>
+                <field name="responsable"/>
+                <field name="miembros"/>
+                <field name="ticket_ids"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

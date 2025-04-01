@@ -12,20 +12,22 @@
         <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
-<!--                    <field name="state" widget="statusbar" string="Status"/>-->
+                    <button name="action_cerrar" type="object" string="Cerrar ticket" invisible="estado=='cerrado'"/>
+                    <button name="action_reabrir" type="object" string="Reabrir ticket" invisible="estado=='abierto'"/>
+                    <field name="estado" widget="statusbar" string="Estado"/>
                 </header>
                 <sheet>
                     <group>
                         <h1 class="mb32">
-                            <field name="nombre"/>
+                            <field name="name"/>
                         </h1>
                     </group>
                     <group>
                         <group>
                             <field name="descripcion" string="Descripción"/>
-                            <field name="equipo_asociado"/>
+                            <field name="equipo_asociado_id" string="Equipo asociado"/>
                             <field name="prioridad"/>
-                            <field name="categoria"/>
+                            <field name="categoria_id"/>
                         </group>
                     </group>
                 </sheet>
@@ -39,14 +41,14 @@
 
         <field name="arch" type="xml">
             <tree string="Tickets">
-                <field name="nombre"/>
+                <field name="name"/>
                 <field name="descripcion" string="Descripción"/>
-                <field name="equipo_asociado"/>
+                <field name="equipo_asociado_id"/>
                 <field name="prioridad"/>
-                <field name="categoria"/>
-                <field name="fecha_asignacion"/>
-                <field name="fecha_actualizacion"/>
-                <field name="fecha_cierre"/>
+                <field name="categoria_id"/>
+                <field name="fecha_asignacion" string="Fecha de asignación"/>
+                <field name="fecha_actualizacion" string="Fecha de actualización"/>
+                <field name="fecha_cierre" string="Fecha de cierre"/>
             </tree>
         </field>
     </record>
