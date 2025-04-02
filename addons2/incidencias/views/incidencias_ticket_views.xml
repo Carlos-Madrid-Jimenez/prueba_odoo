@@ -29,8 +29,22 @@
                             <field name="prioridad"/>
                             <field name="categoria_id"/>
                         </group>
+                        <group>
+                            <field name="fecha_asignacion" string="Fecha de asignación"/>
+                            <field name="fecha_actualizacion" string="Fecha de actualización"/>
+                            <field name="fecha_cierre" string="Fecha de cierre"/>
+                        </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field
+                        name="message_ids"
+                        widget="mail_thread"
+                        options="{'post_refresh': 'recipients', 'open_attachments': True}"
+                    />
+                </div>
             </form>
         </field>
     </record>

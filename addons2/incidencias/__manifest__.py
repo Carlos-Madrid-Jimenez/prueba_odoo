@@ -1,7 +1,7 @@
 {
     'name': "Incidencias",
     'version': '17.0.1.1',
-    'depends': ['base'],
+    'depends': ["mail"],
     'author': "Carlos Madrid Jiménez",
     'category': 'Category',
     'description': """
@@ -11,6 +11,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/incidencias_ticket_views.xml',
+        'views/incidencias_ticket_categoria_views.xml',
         'views/incidencias_equipo_views.xml',
         'views/incidencias_menus.xml',
     ],

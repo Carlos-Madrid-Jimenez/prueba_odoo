@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="incidencias_categoria_action" model="ir.actions.act_window">
+        <field name="name">Categorías</field>
+        <field name="res_model">incidencias.ticket.categoria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="incidencias_categoria_view_form" model="ir.ui.view">
+        <field name="name">incidencias.ticket.categoria.form</field>
+        <field name="model">incidencias.ticket.categoria</field>
+        <field name="arch" type="xml">
+            <form string="Categoría">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="incidencias_categoria_view_tree" model="ir.ui.view">
+        <field name="name">incidencias.ticket.categoria.list</field>
+        <field name="model">incidencias.ticket.categoria</field>
+        <field name="arch" type="xml">
+            <tree string="Categorías">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
