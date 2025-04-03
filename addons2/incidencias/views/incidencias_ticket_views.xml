@@ -28,6 +28,7 @@
                             <field name="equipo_asociado_id" string="Equipo asociado"/>
                             <field name="prioridad"/>
                             <field name="categoria_id"/>
+                            <field name="canal_id"/>
                         </group>
                         <group>
                             <field name="fecha_asignacion" string="Fecha de asignación"/>
@@ -60,6 +61,7 @@
                 <field name="equipo_asociado_id"/>
                 <field name="prioridad"/>
                 <field name="categoria_id"/>
+                <field name="canal_id"/>
                 <field name="fecha_asignacion" string="Fecha de asignación"/>
                 <field name="fecha_actualizacion" string="Fecha de actualización"/>
                 <field name="fecha_cierre" string="Fecha de cierre"/>

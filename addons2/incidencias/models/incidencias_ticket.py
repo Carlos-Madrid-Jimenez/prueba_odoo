@@ -34,3 +34,10 @@ class Ticket(models.Model):
             ticket.estado = "abierto"
             ticket.fecha_cierre = None
         return True
+
+    @api.model
+    def write(self, vals):
+        for ticket in self:
+            ticket.fecha_actualizacion = fields.Date.today()
+
+        return super().create(vals)

@@ -12,6 +12,7 @@
         'security/ir.model.access.csv',
         'views/incidencias_ticket_views.xml',
         'views/incidencias_ticket_categoria_views.xml',
+        'views/incidencias_ticket_canal_views.xml',
         'views/incidencias_equipo_views.xml',
         'views/incidencias_menus.xml',
     ],

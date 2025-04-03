@@ -5,4 +5,5 @@
             <menuitem id="incidencias_ticket_menu_action" action="incidencias_ticket_action" parent="incidencias_first_level_menu"/>
             <menuitem id="incidencias_equipo_menu_action" action="incidencias_equipo_action" parent="incidencias_first_level_menu"/>
             <menuitem id="incidencias_categoria_menu_action" action="incidencias_categoria_action" parent="incidencias_first_level_menu"/>
+            <menuitem id="incidencias_canal_menu_action" action="incidencias_canal_action" parent="incidencias_first_level_menu"/>
 </odoo>
