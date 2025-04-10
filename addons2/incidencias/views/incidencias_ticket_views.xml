@@ -81,11 +81,12 @@
                 <sheet>
                     <group>
                         <h1 class="mb32">
-                            <field name="name"/>
+                            <field name="codigo"/>
                         </h1>
                     </group>
                     <group>
                         <group>
+                            <field name="name"/>
                             <field name="descripcion" string="Descripción"/>
                             <field name="equipo_asociado_id" string="Equipo asociado"/>
                             <field name="prioridad"/>

@@ -6,6 +6,7 @@ class Ticket(models.Model):
     _inherit = ["mail.thread.cc", "mail.activity.mixin"]
 
     name = fields.Char(required=True, string="Nombre")
+    codigo = fields.Char(readonly=True, string="Código")
     descripcion = fields.Html()
     equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo")
     persona_asignada_id = fields.Many2one("res.users", string="Persona asociada")
@@ -28,7 +29,13 @@ class Ticket(models.Model):
         tracking=True
     )
 
-    # @api.model
+    @api.model
+    def create(self, vals):
+        for ticket in vals:
+            ticket.codigo = "placeholder"
+
+        return super().create(vals)
+
     def write(self, vals):
         vals["fecha_actualizacion"] = fields.Date.today()
 
