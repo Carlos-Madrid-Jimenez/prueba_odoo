@@ -3,7 +3,71 @@
     <record id="incidencias_ticket_action" model="ir.actions.act_window">
         <field name="name">Tickets</field>
         <field name="res_model">incidencias.ticket</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="incidencias_ticket_view_kanban" model="ir.ui.view">
+        <field name="name">incidencias.ticket.kanban</field>
+        <field name="model">incidencias.ticket</field>
+<!--        <field name="priority" eval="100" />-->
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" default_group_by="estado">
+                <field name="name" />
+                <field name="persona_asignada_id" />
+                <field name="estado" />
+                <field name="prioridad" />
+                <field name="fecha_asignacion" />
+<!--                <progressbar-->
+<!--                    field="activity_state"-->
+<!--                    colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"-->
+<!--                />-->
+                <templates>
+                    <t
+                        t-name="kanban-menu"
+                        t-if="!selection_mode"
+                        groups="base.group_user"
+                    >
+                        <div class="o_kanban_card_manage_section">
+                            <div role="menuitem" class="o_kanban_manage_reports">
+                                <a
+                                    t-if="widget.editable"
+                                    role="menuitem"
+                                    type="edit"
+                                    class="dropdown-item"
+                                >Edit
+                                </a>
+                                <a
+                                    t-if="widget.deletable"
+                                    role="menuitem"
+                                    type="delete"
+                                    class="dropdown-item"
+                                >Delete
+                                </a>
+                                <div role="separator" class="dropdown-divider" />
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <field name="name" />
+                                    <small class="o_kanban_record_subtitle text-muted">
+                                        <field name="persona_asignada_id" />
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body" />
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <field name="prioridad" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
     </record>
 
     <record id="incidencias_ticket_view_form" model="ir.ui.view">
@@ -12,9 +76,7 @@
         <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
-                    <button name="action_cerrar" type="object" string="Cerrar ticket" invisible="estado=='cerrado'"/>
-                    <button name="action_reabrir" type="object" string="Reabrir ticket" invisible="estado=='abierto'"/>
-                    <field name="estado" widget="statusbar" string="Estado"/>
+                    <field name="estado" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" string="Estado"/>
                 </header>
                 <sheet>
                     <group>
@@ -30,12 +92,16 @@
                             <field name="categoria_id"/>
                             <field name="canal_id"/>
                         </group>
-                        <group>
-                            <field name="fecha_asignacion" string="Fecha de asignación"/>
-                            <field name="fecha_actualizacion" string="Fecha de actualización"/>
-                            <field name="fecha_cierre" string="Fecha de cierre"/>
-                        </group>
                     </group>
+                    <notebook>
+                        <page string="Información">
+                            <group>
+                                <field name="fecha_asignacion" string="Fecha de asignación"/>
+                                <field name="fecha_actualizacion" string="Fecha de actualización"/>
+                                <field name="fecha_cierre" string="Fecha de cierre"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" />
