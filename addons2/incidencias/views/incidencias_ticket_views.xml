@@ -79,19 +79,22 @@
                     <field name="estado" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" string="Estado"/>
                 </header>
                 <sheet>
-                    <group>
-                        <h1 class="mb32">
-                            <field name="codigo"/>
-                        </h1>
-                    </group>
+                    <h1 class="mb32">
+                        <field name="codigo"/>
+                    </h1>
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="descripcion" string="Descripción"/>
                             <field name="equipo_asociado_id" string="Equipo asociado"/>
                             <field name="prioridad"/>
+                        </group>
+
+                        <group>
                             <field name="categoria_id"/>
                             <field name="canal_id"/>
+                            <field name="tiempo_dedicado" string="Tiempo dedicado"/>
+                            <field name="coste"/>
                         </group>
                     </group>
                     <notebook>

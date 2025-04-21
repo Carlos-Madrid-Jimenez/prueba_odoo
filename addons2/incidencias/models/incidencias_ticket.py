@@ -6,6 +6,10 @@ class Ticket(models.Model):
     _inherit = ["mail.thread.cc", "mail.activity.mixin"]
 
     name = fields.Char(required=True, string="Nombre")
+    sequence = fields.Integer(
+        index=True,
+        default=10,
+    )
     codigo = fields.Char(readonly=True, string="Código")
     descripcion = fields.Html()
     equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo")
@@ -13,6 +17,8 @@ class Ticket(models.Model):
     fecha_actualizacion = fields.Date(readonly=True)
     fecha_asignacion = fields.Date(readonly=True, default=lambda self: fields.Date.today(), tracking=True)
     fecha_cierre = fields.Date(readonly=True)
+    tiempo_dedicado = fields.Float()
+    coste = fields.Float()
     prioridad = fields.Selection(
         selection=[('baja', 'Baja'), ('media', 'Media'), ('alta', 'Alta'), ('urgente', 'Urgente')],
         tracking=True
@@ -31,10 +37,15 @@ class Ticket(models.Model):
 
     @api.model
     def create(self, vals):
-        for ticket in vals:
-            ticket.codigo = "placeholder"
+        record = super().create(vals)
 
-        return super().create(vals)
+        nombre_equipo = record.equipo_asociado_id.name
+        palabras = nombre_equipo.split()
+        prefijo = ''.join([palabra[0].upper() for palabra in palabras if palabra])
+
+        record.write({'codigo': f'{prefijo}-{record.id}'})
+
+        return record
 
     def write(self, vals):
         vals["fecha_actualizacion"] = fields.Date.today()
