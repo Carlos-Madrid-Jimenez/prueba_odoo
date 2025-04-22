@@ -6,10 +6,24 @@
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
+    <record id="incidencias_ticket_search" model="ir.ui.view">
+        <field name="name">incidencias.ticket.search</field>
+        <field name="model">incidencias.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Ticket">
+                <field name="codigo" string="Código"/>
+                <field name="name" string="Nombre" />
+                <separator/>
+                <group expand="1" string="Agrupar">
+                    <filter string="Equipo" name="equipo_asociado_id" context="{'group_by':'equipo_asociado_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="incidencias_ticket_view_kanban" model="ir.ui.view">
         <field name="name">incidencias.ticket.kanban</field>
         <field name="model">incidencias.ticket</field>
-<!--        <field name="priority" eval="100" />-->
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile" default_group_by="estado">
                 <field name="name" />

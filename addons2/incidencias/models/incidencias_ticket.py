@@ -31,9 +31,14 @@ class Ticket(models.Model):
             ('completado', 'Completado'), ('cancelado', 'Cancelado'),
             ('invalido', 'Inválido')
         ],
+        group_expand="_group_estados",
         default="nuevo",
         tracking=True
     )
+
+    @api.model
+    def _group_estados(self, estados, domain, order):
+        return ['nuevo', 'en_progreso', 'en_espera', 'completado', 'cancelado', 'invalido']
 
     @api.model
     def create(self, vals):
