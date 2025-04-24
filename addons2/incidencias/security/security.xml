@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_incidencias">
+        <field name="name">Administración de Incidencias</field>
+        <field name="description">Administración de las incidencias por medio de tickets</field>
+    </record>
+
+    <record id="group_incidencias_administrador" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="module_category_incidencias" />
+<!--        <field name="implied_ids" eval="[(4, ref(''))]" />-->
+    </record>
+</odoo>
