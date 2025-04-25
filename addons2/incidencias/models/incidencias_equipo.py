@@ -6,5 +6,5 @@ class Equipo(models.Model):
 
     name = fields.Char(required=True, string="Nombre")
     responsable = fields.Many2one("res.users")
-    miembros = fields.Many2one("res.users")
+    miembros = fields.Many2many("res.users", "partner_id", string="Miembros")
     ticket_ids = fields.One2many("incidencias.ticket", "equipo_asociado_id")

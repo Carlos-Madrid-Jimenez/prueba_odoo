@@ -10,6 +10,7 @@
     # data files always loaded at installation
     'data': [
         'security/ir.model.access.csv',
+        "security/security.xml",
         'views/incidencias_ticket_views.xml',
         'views/incidencias_ticket_categoria_views.xml',
         'views/incidencias_ticket_canal_views.xml',

@@ -11,9 +11,7 @@
         <field name="model">incidencias.equipo</field>
         <field name="arch" type="xml">
             <form string="Equipo">
-                <header>
-<!--                    <field name="state" widget="statusbar" string="Status"/>-->
-                </header>
+                <header></header>
                 <sheet>
                     <group>
                         <h1 class="mb32">
@@ -23,9 +21,13 @@
                     <group>
                         <group>
                             <field name="responsable"/>
-                            <field name="miembros"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Miembros">
+                            <field name="miembros"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
