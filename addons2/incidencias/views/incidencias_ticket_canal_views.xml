@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="incidencias_canal_action" model="ir.actions.act_window">
-        <field name="name">Categorías</field>
+        <field name="name">Canales</field>
         <field name="res_model">incidencias.ticket.canal</field>
         <field name="view_mode">tree,form</field>
     </record>
