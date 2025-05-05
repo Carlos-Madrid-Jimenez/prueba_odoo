@@ -9,6 +9,7 @@
     """,
     # data files always loaded at installation
     'data': [
+        'data/ticket_mail_template.xml',
         'security/ir.model.access.csv',
         "security/security.xml",
         'views/incidencias_ticket_views.xml',

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ticket_mail_template" model="mail.template">
+            <field name="name">Notificación de Nuevo Ticket</field>
+            <field name="model_id" ref="model_incidencias_ticket"/>
+            <field name="subject">Nuevo ticket creado</field>
+            <field name="email_from">${user.email_formatted}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.env.user.lang}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; background-color: #f2f2f2;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding: 20px; background-color: #f2f2f2; border-collapse:separate;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: white; color: #454748; border-collapse:separate; border-radius: 5px;">
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #875A7B; color: white; padding: 10px; border-collapse:separate; border-radius: 5px 5px 0px 0px;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                            Nuevo Ticket: <t t-out="object.name"></t>
+                                                        </span>
+                                                    </td>
+                                                    <td valign="middle" align="right">
+                                                        <span style="font-size: 15px;">
+                                                            <t t-out="object.codigo"></t>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding: 20px;">
+                                            <p style="margin-top: 0px;">Estimado/a miembro del equipo,</p>
+                                            <p>Se ha creado un nuevo ticket:</p>
+
+                                            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Título:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><t t-out="object.name"></t></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Código:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><t t-out="object.codigo"></t></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Equipo:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"> <t t-out="object.equipo_asociado_id.name"></t> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Prioridad:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><t t-out="object.prioridad"></t></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Fecha de Asignación:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><t t-out="object.fecha_asignacion"></t></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><strong>Categoría:</strong></td>
+                                                    <td style="border-bottom: 1px solid #0f0f0f; padding: 8px;"><t t-out="object.categoria_id.name"></t></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px; vertical-align: top;"><strong>Descripción:</strong></td>
+                                                    <td style="padding: 8px;">
+                                                        <div>
+                                                            <t t-out="object.descripcion"></t>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div style="margin: 16px 0px 16px 0px;">
+                                                <a href="/mail/view?model=incidencias.ticket&amp;res_id=${object.id}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                    Ver Ticket
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

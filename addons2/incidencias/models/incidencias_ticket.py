@@ -50,6 +50,18 @@ class Ticket(models.Model):
 
         record.write({'codigo': f'{prefijo}-{record.id}'})
 
+        template_correo = self.env.ref('incidencias.ticket_mail_template')
+
+        if record.equipo_asociado_id:
+            miembros_equipo = self.env['res.users'].search([
+                ('id', 'in', record.equipo_asociado_id.miembros.ids)
+            ])
+
+            for miembro in miembros_equipo:
+                template_correo.with_context(email_to=miembro.email).send_mail(
+                    record.id, force_send=True, email_values={'email_to': miembro.email}
+                )
+
         return record
 
     def write(self, vals):
