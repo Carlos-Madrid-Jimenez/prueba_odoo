@@ -67,4 +67,11 @@ class Ticket(models.Model):
     def write(self, vals):
         vals["fecha_actualizacion"] = fields.Date.today()
 
+        if vals.get("persona_asignada_id"):
+            if self.estado == "nuevo":
+                vals["estado"] = "en_progreso"
+
         return super(Ticket, self).write(vals)
+
+    def asignarme_a_mi(self):
+        self.write({"persona_asignada_id": self.env.user.id})

@@ -90,6 +90,12 @@
         <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
+                    <button
+                        string="Asignarme a mí"
+                        name="asignarme_a_mi"
+                        type="object"
+                        invisible="persona_asignada_id"
+                    />
                     <field name="estado" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" string="Estado"/>
                 </header>
                 <sheet>
@@ -101,6 +107,7 @@
                             <field name="name"/>
                             <field name="descripcion" string="Descripción"/>
                             <field name="equipo_asociado_id" string="Equipo asociado"/>
+                            <field name="persona_asignada_id" string="Persona asignada"/>
                             <field name="prioridad"/>
                         </group>
 
