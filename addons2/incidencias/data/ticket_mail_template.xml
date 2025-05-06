@@ -73,8 +73,8 @@
                                                 </tr>
                                             </table>
 
-                                            <div style="margin: 16px 0px 16px 0px;">
-                                                <a href="/mail/view?model=incidencias.ticket&amp;res_id=${object.id}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                            <div style="margin: 16px 0px;">
+                                                <a href="/mail/view?model=incidencias.ticket&amp;res_id=${object.id}" style="background-color: #875A7B; padding: 10px 15px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
                                                     Ver Ticket
                                                 </a>
                                             </div>
