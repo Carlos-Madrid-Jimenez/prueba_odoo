@@ -76,6 +76,9 @@
                                 <div class="oe_kanban_bottom_left">
                                     <field name="prioridad" />
                                 </div>
+                                <div class="oe_janban_bottom_right">
+                                    <field name="create_uid" widget="many2one_avatar" options="{'size': 24}" class="float-right"/>
+                                </div>
                             </div>
                         </div>
                     </t>
@@ -114,12 +117,17 @@
                         <group>
                             <field name="categoria_id"/>
                             <field name="canal_id"/>
-                            <field name="tiempo_dedicado" string="Tiempo dedicado"/>
-                            <field name="coste"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Información">
+                            <group>
+                                <field name="create_uid" string="Creador del ticket"/>
+                                <field name="tiempo_dedicado" string="Tiempo dedicado"/>
+                                <field name="coste"/>
+                            </group>
+                        </page>
+                        <page string="Registro de modificación" groups="incidencias.group_incidencias_administrador">
                             <group>
                                 <field name="fecha_asignacion" string="Fecha de asignación"/>
                                 <field name="fecha_actualizacion" string="Fecha de actualización"/>

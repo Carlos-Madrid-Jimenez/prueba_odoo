@@ -14,9 +14,9 @@ class Ticket(models.Model):
     descripcion = fields.Html()
     equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo")
     persona_asignada_id = fields.Many2one("res.users", string="Persona asociada")
-    fecha_actualizacion = fields.Date(readonly=True)
-    fecha_asignacion = fields.Date(readonly=True, default=lambda self: fields.Date.today(), tracking=True)
-    fecha_cierre = fields.Date(readonly=True)
+    fecha_actualizacion = fields.Datetime(readonly=True)
+    fecha_asignacion = fields.Datetime(readonly=True, default=lambda self: fields.Datetime.now(), tracking=True)
+    fecha_cierre = fields.Datetime(readonly=True)
     tiempo_dedicado = fields.Float()
     coste = fields.Float()
     prioridad = fields.Selection(
@@ -65,7 +65,24 @@ class Ticket(models.Model):
         return record
 
     def write(self, vals):
-        vals["fecha_actualizacion"] = fields.Date.today()
+        vals["fecha_actualizacion"] = fields.Datetime.now()
+
+        if vals.get("estado"):
+            if vals["estado"] == "completado":
+                vals["fecha_cierre"] = fields.Datetime.now()
+
+                template_correo = self.env.ref('incidencias.ticket_cerrado_mail_template')
+
+                if self.equipo_asociado_id:
+                    miembros_equipo = self.env['res.users'].search([
+                        ('id', 'in', self.equipo_asociado_id.miembros.ids)
+                    ])
+
+                    for miembro in miembros_equipo:
+                        template_correo.with_context(email_to=miembro.email).send_mail(
+                            self.id, force_send=True, email_values={'email_to': miembro.email}
+                        )
+
 
         if vals.get("persona_asignada_id"):
             if self.estado == "nuevo":
