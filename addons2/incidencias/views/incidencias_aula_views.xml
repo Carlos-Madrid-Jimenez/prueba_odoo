@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="incidencias_aula_action" model="ir.actions.act_window">
+        <field name="name">Aulas</field>
+        <field name="res_model">incidencias.aula</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="incidencias_aula_view_form" model="ir.ui.view">
+        <field name="name">incidencias.aula.form</field>
+        <field name="model">incidencias.aula</field>
+        <field name="arch" type="xml">
+            <form string="Aula">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="plano" widget="image"/>
+                    </group>
+                    <notebook>
+                        <page string="Items">
+                            <group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="incidencias_aula_view_tree" model="ir.ui.view">
+        <field name="name">incidencias.aula.list</field>
+        <field name="model">incidencias.aula</field>
+        <field name="arch" type="xml">
+            <tree string="Aulas">
+                <field name="name"/>
+                <field name="plano" widget="image" class="oe_avatar"/>
+<!--                <field name="items"/>-->
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -117,6 +117,8 @@
                         <group>
                             <field name="categoria_id"/>
                             <field name="canal_id"/>
+                            <field name="aula_id"/>
+                            <field name="plano_aula" widget="image"/>
                         </group>
                     </group>
                     <notebook>

@@ -14,6 +14,8 @@ class Ticket(models.Model):
     descripcion = fields.Html()
     equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo")
     persona_asignada_id = fields.Many2one("res.users", string="Persona asociada")
+    aula_id = fields.Many2one("incidencias.aula", string="Aula")
+    plano_aula = fields.Image(related="aula_id.plano", string="Plano")
     fecha_actualizacion = fields.Datetime(readonly=True)
     fecha_asignacion = fields.Datetime(readonly=True, default=lambda self: fields.Datetime.now(), tracking=True)
     fecha_cierre = fields.Datetime(readonly=True)

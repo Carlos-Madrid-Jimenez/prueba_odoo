@@ -5,3 +5,4 @@ incidencias.access_incidencias_equipo,access_incidencias_equipo,incidencias.mode
 incidencias.access_incidencias_ticket,access_incidencias_ticket,incidencias.model_incidencias_ticket,base.group_user,1,1,1,0
 incidencias.access_incidencias_ticket_categoria,access_incidencias_ticket_categoria,incidencias.model_incidencias_ticket_categoria,base.group_user,1,1,1,1
 incidencias.access_incidencias_ticket_canal,access_incidencias_ticket_canal,incidencias.model_incidencias_ticket_canal,base.group_user,1,1,1,1
+incidencias.access_incidencias_aula,access_incidencias_aula,incidencias.model_incidencias_aula,base.group_user,1,1,1,1

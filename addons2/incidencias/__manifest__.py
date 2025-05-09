@@ -17,6 +17,7 @@
         'views/incidencias_ticket_categoria_views.xml',
         'views/incidencias_ticket_canal_views.xml',
         'views/incidencias_equipo_views.xml',
+        'views/incidencias_aula_views.xml',
         'views/incidencias_menus.xml',
     ],
     # data files containing optionally loaded demonstration data
