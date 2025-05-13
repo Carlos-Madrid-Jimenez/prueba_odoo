@@ -6,6 +6,18 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="incidencias_aula_search" model="ir.ui.view">
+        <field name="name">incidencias.aula.search</field>
+        <field name="model">incidencias.aula</field>
+        <field name="arch" type="xml">
+            <search string="Aula">
+                <field name="name" string="Nombre" />
+                <separator/>
+                <filter string="Tienen un ticket asociado" name="ticket_ids" domain="[('ticket_ids', '>', '1')]"/>
+            </search>
+        </field>
+    </record>
+
     <record id="incidencias_aula_view_form" model="ir.ui.view">
         <field name="name">incidencias.aula.form</field>
         <field name="model">incidencias.aula</field>
@@ -19,6 +31,11 @@
                         <field name="plano" widget="image"/>
                     </group>
                     <notebook>
+                        <page string="Tickets asociados">
+                            <group>
+                                <field name="ticket_ids"/>
+                            </group>
+                        </page>
                         <page string="Items">
                             <group>
                             </group>
@@ -35,6 +52,7 @@
         <field name="arch" type="xml">
             <tree string="Aulas">
                 <field name="name"/>
+                <field name="ticket_ids" string="Tickets asociados"/>
                 <field name="plano" widget="image" class="oe_avatar"/>
 <!--                <field name="items"/>-->
             </tree>

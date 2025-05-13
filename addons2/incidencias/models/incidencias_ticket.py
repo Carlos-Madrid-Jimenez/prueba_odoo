@@ -12,7 +12,7 @@ class Ticket(models.Model):
     )
     codigo = fields.Char(readonly=True, string="Código")
     descripcion = fields.Html()
-    equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo")
+    equipo_asociado_id = fields.Many2one("incidencias.equipo", string="Equipo", required=True)
     persona_asignada_id = fields.Many2one("res.users", string="Persona asociada")
     aula_id = fields.Many2one("incidencias.aula", string="Aula")
     plano_aula = fields.Image(related="aula_id.plano", string="Plano")
@@ -46,11 +46,12 @@ class Ticket(models.Model):
     def create(self, vals):
         record = super().create(vals)
 
-        nombre_equipo = record.equipo_asociado_id.name
-        palabras = nombre_equipo.split()
-        prefijo = ''.join([palabra[0].upper() for palabra in palabras if palabra])
+        if vals.get("equipo_asociado_id"):
+            nombre_equipo = record.equipo_asociado_id.name
+            palabras = nombre_equipo.split()
+            prefijo = ''.join([palabra[0].upper() for palabra in palabras if palabra])
 
-        record.write({'codigo': f'{prefijo}-{record.id}'})
+            record.write({'codigo': f'{prefijo}-{record.id}'})
 
         template_correo = self.env.ref('incidencias.ticket_mail_template')
 
@@ -93,4 +94,5 @@ class Ticket(models.Model):
         return super(Ticket, self).write(vals)
 
     def asignarme_a_mi(self):
-        self.write({"persona_asignada_id": self.env.user.id})
+        for ticket in self:
+            ticket.persona_asignada_id = self.env.user.id
