@@ -14,7 +14,7 @@
                 <field name="codigo" string="Código"/>
                 <field name="name" string="Nombre" />
                 <separator/>
-<!--                <filter string="Available" name="state" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>-->
+                <filter string="Más de 1 hora de duración" name="tiempo_dedicado" domain="[('tiempo_dedicado', '>', '1')]"/>
                 <group expand="1" string="Agrupar">
                     <filter string="Equipo" name="equipo_asociado_id" context="{'group_by':'equipo_asociado_id'}"/>
                     <filter string="Prioridad" name="prioridad" context="{'group_by':'prioridad'}"/>
@@ -127,7 +127,7 @@
                         <page string="Información" groups="incidencias.group_incidencias_administrador">
                             <group>
                                 <field name="create_uid" string="Creador del ticket"/>
-                                <field name="tiempo_dedicado" string="Tiempo dedicado"/>
+                                <field name="tiempo_dedicado" string="Tiempo dedicado (horas)"/>
                                 <field name="coste"/>
                             </group>
                         </page>

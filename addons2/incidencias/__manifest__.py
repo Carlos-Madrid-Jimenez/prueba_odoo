@@ -19,6 +19,7 @@
         'views/incidencias_equipo_views.xml',
         'views/incidencias_aula_views.xml',
         'views/incidencias_menus.xml',
+        'views/ticket_abiertos_template.xml',
     ],
     # data files containing optionally loaded demonstration data
     # 'demo': [],
