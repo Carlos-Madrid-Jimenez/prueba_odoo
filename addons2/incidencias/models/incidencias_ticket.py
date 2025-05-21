@@ -38,6 +38,9 @@ class Ticket(models.Model):
         tracking=True
     )
 
+    def to_json(self):
+        return {'codigo': self.codigo, 'nombre': self.name}
+
     @api.model
     def _group_estados(self, estados, domain, order):
         return ['nuevo', 'en_progreso', 'en_espera', 'completado', 'cancelado', 'invalido']
