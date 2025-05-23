@@ -6,7 +6,7 @@ import json
 class IncidenciasController(http.Controller):
     @http.route("/incidencias/abiertos", auth="public", type="http")
     def incidencias_abiertos(self):
-        tickets = request.env['incidencias.ticket'].sudo().search([])
+        tickets = request.env['incidencias.ticket'].sudo().search(['|', ('estado', '=', 'en_progreso'), ('estado', '=', 'en_espera')])
         tickets_data = []
 
         for t in tickets:

@@ -15,6 +15,7 @@
                 <field name="name" string="Nombre" />
                 <separator/>
                 <filter string="Más de 1 hora de duración" name="tiempo_dedicado" domain="[('tiempo_dedicado', '>', '1')]"/>
+                <filter string="Por persona asignada" name="persona_asignada_id" domain="[('persona_asignada_id', '!=', 'false')]"/>
                 <group expand="1" string="Agrupar">
                     <filter string="Equipo" name="equipo_asociado_id" context="{'group_by':'equipo_asociado_id'}"/>
                     <filter string="Prioridad" name="prioridad" context="{'group_by':'prioridad'}"/>
