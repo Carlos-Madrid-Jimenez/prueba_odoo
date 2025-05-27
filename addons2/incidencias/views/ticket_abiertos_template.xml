@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <template id="ticket_abiertos_template" name="Tickets abiertos">
-        <t t-foreach="tickets" t-as="ticket">
-            <t t-esc="ticket.codigo"/>
-            <t t-esc="ticket.name"/>
-        </t>
-    </template>
-</odoo>

@@ -34,10 +34,6 @@
                 <field name="estado" />
                 <field name="prioridad" />
                 <field name="fecha_asignacion" />
-<!--                <progressbar-->
-<!--                    field="activity_state"-->
-<!--                    colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"-->
-<!--                />-->
                 <templates>
                     <t
                         t-name="kanban-menu"

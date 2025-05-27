@@ -54,7 +54,6 @@
                 <field name="name"/>
                 <field name="ticket_ids" string="Tickets asociados"/>
                 <field name="plano" widget="image" class="oe_avatar"/>
-<!--                <field name="items"/>-->
             </tree>
         </field>
     </record>
